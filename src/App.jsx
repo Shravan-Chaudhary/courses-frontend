@@ -1,5 +1,7 @@
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import '@fontsource/roboto/400.css'
 import SignUp from './SignUp.jsx'
+import AppBar from './AppBar.jsx'
 
 function App() {
   return (
@@ -8,7 +10,13 @@ function App() {
       height: '100vh',
       backgroundColor: '#eeeeee'
     }}>
-      <SignUp />
+      <AppBar />
+      <Router>
+        <Routes>
+          <Route path={'/signup'} element={<SignUp />} />
+          <Route path={'/signup'} element={<SignIn />} />
+        </Routes>
+      </Router>
     </div>
   )
 }
