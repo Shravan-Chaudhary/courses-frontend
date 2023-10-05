@@ -1,3 +1,6 @@
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import { Card, CardActions, CardContent, Typography } from '@mui/material'
 
 
 function SignUp () {
@@ -7,21 +10,30 @@ function SignUp () {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems:'center',
-      marginTop: 150
+      paddingTop: 150
     }}>
       <div>
-        <h1>Welcome to Coursera. Sign Up below</h1>
+        <Typography variant={'h5'}>Welcome to Coursera. Sign Up below</Typography>
       </div>
 
       <div style={{
-        border: '2px solid black',
-        width: 400
+        marginTop: 10
       }}>
-        Username - <input type="text"/>
-        <br/><br/>
-        Password - <input type="password"/>
-        <br/><br/>
-        <button>Submit</button>
+        <Card>
+          <CardContent sx={{ minWidth: 400 }}>
+            <TextField fullWidth id="outlined-basic" label="Email" variant="outlined" />
+            <br/><br/>
+            <TextField fullWidth id="outlined-basic" label="Password" variant="outlined" />
+            <br/><br/>
+          </CardContent>
+          <CardActions sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Button size={'large'} variant="contained">Submit</Button>
+          </CardActions>
+        </Card>
       </div>
     </div>
   )
