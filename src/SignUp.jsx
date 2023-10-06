@@ -31,7 +31,7 @@ function SignUp () {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-            <Button size={'large'} variant="contained">Submit</Button>
+            <Button size={'large'} variant="contained">Sign Up</Button>
           </CardActions>
         </Card>
       </div>

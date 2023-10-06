@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import '@fontsource/roboto/400.css'
 import SignUp from './SignUp.jsx'
 import AppBar from './AppBar.jsx'
+import SingIn from './SignIn.jsx'
 
 function App() {
   return (
@@ -10,11 +11,11 @@ function App() {
       height: '100vh',
       backgroundColor: '#eeeeee'
     }}>
-      <AppBar />
       <Router>
+        <AppBar />
         <Routes>
-          <Route path={'/signup'} element={<SignUp />} />
-          <Route path={'/signup'} element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signin' element={<SingIn />} />
         </Routes>
       </Router>
     </div>

@@ -1,7 +1,9 @@
 import { Typography } from '@mui/material'
 import Button from '@mui/material/Button'
+import { useNavigate } from 'react-router-dom'
 
 const AppBar = () => {
+  const navigate  = useNavigate()
   return (
     <>
       <nav style={{
@@ -18,10 +20,10 @@ const AppBar = () => {
           marginRight: 10
         }}>
           <div style={{marginRight: 10}}>
-            <Button size={'large'} variant={'contained'}>Sign Up</Button>
+            <Button size={'large'} variant={'contained'} onClick={() => {navigate('/signup')}} >Sign Up</Button>
           </div>
           <div>
-            <Button size={'large'} variant={'text'}>Sign In</Button>
+            <Button size={'large'} variant={'text'} onClick={() => {navigate('/signin')}}>Sign In</Button>
           </div>
         </div>
       </nav>
