@@ -1,18 +1,19 @@
 import { Card, Typography, CardContent } from '@mui/material'
 
-const CourseCard = () => {
+
+const CourseCard = (props) => {
   return (
     <div style={{
       display: 'flex',
-      justifyContent: 'center'
+      margin: 10
     }}>
       <Card sx={{
         minWidth: 300
       }}>
         <CardContent >
-          <Typography variant={'h5'} >Title</Typography>
-          <Typography variant={'h6'} sx={{mb: 1.5}} color={'text.secondary'} >Description</Typography>
-          <img src="https://gratisography.com/wp-content/uploads/2022/05/gratisography-heavenly-free-stock-photo-1170x775.jpg" alt="Course-image" style={{width: 300}}/>
+          <Typography variant={'h5'} >{props.course.title}</Typography>
+          <Typography variant={'subtitle1'} sx={{mb: 1.5}} color={'text.secondary'} >{props.course.description}</Typography>
+          <img src={props.course.imageLink} alt="Course-image" style={{width: 300}}/>
         </CardContent>
       </Card>
     </div>

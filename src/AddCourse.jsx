@@ -1,9 +1,28 @@
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
+import { useState } from 'react'
 
 
 function AddCourse () {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [imageLink, setImageLink] = useState('')
+
+  const handleOnSubmit = () => {
+    fetch('http://localhost:3000/api/admin/courses',{
+      method: 'POST',
+      body: JSON.stringify({title, description, imageLink}),
+      headers: {
+        "Content-type": "application/json",
+        'authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error('AddCourse Fetch: ' + err))
+  }
+
   return (
     <div style={{
       display: 'flex',
@@ -21,9 +40,11 @@ function AddCourse () {
       }}>
         <Card>
           <CardContent sx={{ minWidth: 400 }}>
-            <TextField fullWidth id="outlined-basic" label="Title" variant="outlined" />
+            <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={e => setTitle(e.target.value)}/>
             <br/><br/>
-            <TextField fullWidth id="outlined-basic" label="Description" variant="outlined" />
+            <TextField fullWidth id="description" label="Description" variant="outlined" value={description} onChange={e => setDescription(e.target.value)}/>
+            <br/><br/>
+            <TextField fullWidth id="image-link" label="Image Link" variant="outlined" value={imageLink} onChange={e => setImageLink(e.target.value)}/>
             <br/><br/>
           </CardContent>
           <CardActions sx={{
@@ -31,7 +52,7 @@ function AddCourse () {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-            <Button size={'large'} variant="contained">Add Course</Button>
+            <Button size={'large'} variant="contained" onClick={handleOnSubmit}>Add Course</Button>
           </CardActions>
         </Card>
       </div>
