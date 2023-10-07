@@ -1,9 +1,29 @@
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
+import { useState } from 'react'
 
 
 function SignUp () {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleOnSubmit = () => {
+    fetch('http://localhost:3000/api/admin/signup',{
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        localStorage.setItem('token', data.token)
+        console.log(data.token)
+      })
+      .catch(err => console.error('Fetch Signup error: ' + err))
+  }
+
   return (
     <div style={{
       display: 'flex',
@@ -21,9 +41,9 @@ function SignUp () {
       }}>
         <Card>
           <CardContent sx={{ minWidth: 400 }}>
-            <TextField fullWidth id="outlined-basic" label="Email" variant="outlined" />
+            <TextField fullWidth id="email" label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)}/>
             <br/><br/>
-            <TextField fullWidth id="outlined-basic" label="Password" variant="outlined" />
+            <TextField fullWidth id="password" label="Password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} />
             <br/><br/>
           </CardContent>
           <CardActions sx={{
@@ -31,7 +51,7 @@ function SignUp () {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-            <Button size={'large'} variant="contained">Sign Up</Button>
+            <Button onClick={handleOnSubmit} size={'large'} variant="contained">Sign Up</Button>
           </CardActions>
         </Card>
       </div>
