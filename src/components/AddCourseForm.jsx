@@ -2,6 +2,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
 import { useState } from 'react'
+import axios from 'axios'
 
 
 function AddCourseForm () {
@@ -9,19 +10,36 @@ function AddCourseForm () {
   const [description, setDescription] = useState('')
   const [imageLink, setImageLink] = useState('')
 
-  const handleOnSubmit = () => {
-    // TODO - Axios
-    fetch('http://localhost:3000/api/admin/courses',{
-      method: 'POST',
-      body: JSON.stringify({title, description, imageLink}),
-      headers: {
-        "Content-type": "application/json",
-        'authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.error('AddCourseForm Fetch: ' + err))
+  const handleOnSubmit = async () => {
+   try {
+     const res = await axios.post('http://localhost:3000/api/admin/courses',{
+       title,
+       description,
+       imageLink
+     },{
+       headers: {
+         Authorization: `Bearer ${localStorage.getItem('token')}`
+       }
+     })
+     const data = res.data
+     alert('Course Added!')
+     console.log(data)
+   }
+   catch (err) {
+     console.error(`AddCourse Fetch: ${err}`)
+   }
+
+    // fetch('http://localhost:3000/api/admin/courses',{
+    //   method: 'POST',
+    //   body: JSON.stringify({title, description, imageLink}),
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     'authorization': `Bearer ${localStorage.getItem('token')}`
+    //   }
+    // })
+    //   .then(res => res.json())
+    //   .then(data => console.log(data))
+    //   .catch(err => console.error('AddCourseForm Fetch: ' + err))
   }
 
   return (
