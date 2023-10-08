@@ -2,27 +2,21 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
 import { useState } from 'react'
+import axios from 'axios'
 
 
 function SignUpForm () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     // TODO - Axios
-    fetch('http://localhost:3000/api/admin/signup',{
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "Content-type": "application/json"
-      }
+    const res = await axios.post('http://localhost:3000/api/admin/signup',{
+      email,
+      password
     })
-      .then(res => res.json())
-      .then(data => {
-        localStorage.setItem('token', data.token)
-        console.log(data.token)
-      })
-      .catch(err => console.error('Fetch Signup error: ' + err))
+    const data = res.data
+    localStorage.setItem('token', data.token)
   }
 
   return (
