@@ -36,10 +36,12 @@ function AddCourse () {
       </div>
 
       <div style={{
-        marginTop: 10
+        marginTop: 10,
+        display: 'flex',
+        justifyContent: 'center',
       }}>
         <Card>
-          <CardContent sx={{ minWidth: 400 }}>
+          <CardContent sx={{ width: 400 }}>
             <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={e => setTitle(e.target.value)}/>
             <br/><br/>
             <TextField fullWidth id="description" label="Description" variant="outlined" value={description} onChange={e => setDescription(e.target.value)}/>
