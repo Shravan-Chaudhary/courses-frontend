@@ -10,13 +10,17 @@ function SignUpForm () {
   const [password, setPassword] = useState('')
 
   const handleOnSubmit = async () => {
-    // TODO - Axios
-    const res = await axios.post('http://localhost:3000/api/admin/signup',{
-      email,
-      password
-    })
-    const data = res.data
-    localStorage.setItem('token', data.token)
+    try {
+      const res = await axios.post('http://localhost:3000/api/admin/signup',{
+        email,
+        password
+      })
+      const data = res.data
+      localStorage.setItem('token', data.token)
+    }
+    catch(err){
+      console.error(`SignUp Error: ${err}`)
+    }
   }
 
   return (

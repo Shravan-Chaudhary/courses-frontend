@@ -12,15 +12,19 @@ function SignInForm () {
   const navigate = useNavigate()
 
   const handleOnSubmit = async () => {
-    // TODO - Axios
-    const res = await axios.post('http://localhost:3000/api/admin/login',{
-      email,
-      password
-    })
-    const data = res.data
-    localStorage.setItem('token', data.token)
-    console.log(data.token)
-    // navigate('/')
+    try {
+      const res = await axios.post('http://localhost:3000/api/admin/login',{
+        email,
+        password
+      })
+      const data = res.data
+      localStorage.setItem('token', data.token)
+      console.log(data.token)
+      // navigate('/')
+    }
+    catch (err) {
+      console.error(`SignIn Fetch Error: ${err}`)
+    }
   }
 
   return (
