@@ -9,6 +9,7 @@ function SignUpForm () {
   const [password, setPassword] = useState('')
 
   const handleOnSubmit = () => {
+    // TODO - Axios
     fetch('http://localhost:3000/api/admin/signup',{
       method: 'POST',
       body: JSON.stringify({ email, password }),

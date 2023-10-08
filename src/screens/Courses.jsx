@@ -1,21 +1,22 @@
 import CourseCard from '../components/CourseCard.jsx'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Courses = () => {
   const [courses, setCourses] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/admin/courses',{
-      method: 'GET',
+    axios.get('http://localhost:3000/api/admin/courses', {
       headers: {
-        "Content-type": "application/json",
-        'authorization': `Bearer ${localStorage.getItem('token')}`
+        "authorization": `Bearer ${localStorage.getItem('token')}`
       }
     })
-      .then(res => res.json())
-      .then(data => setCourses(data))
-      .catch(err => console.error(`Error from get Courses: ${err}`))
+      .then(res => {
+        setCourses(res.data)
+      })
+      .catch(err => console.error('Get courses: ' + err))
   }, [])
+
 
   return (
     <div style={{
