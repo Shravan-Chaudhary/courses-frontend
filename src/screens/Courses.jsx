@@ -1,4 +1,4 @@
-import CourseCard from '../components/CourseCard.component.jsx'
+import CourseCard from '../components/CourseCard.jsx'
 import { useEffect, useState } from 'react'
 
 const Courses = () => {

@@ -4,7 +4,7 @@ import { Card, CardActions, CardContent, Typography } from '@mui/material'
 import { useState } from 'react'
 
 
-function AddCourse () {
+function AddCourseForm () {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [imageLink, setImageLink] = useState('')
@@ -20,7 +20,7 @@ function AddCourse () {
     })
       .then(res => res.json())
       .then(data => console.log(data))
-      .catch(err => console.error('AddCourse Fetch: ' + err))
+      .catch(err => console.error('AddCourseForm Fetch: ' + err))
   }
 
   return (
@@ -62,4 +62,4 @@ function AddCourse () {
   )
 }
 
-export default AddCourse
+export default AddCourseForm
