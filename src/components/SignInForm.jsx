@@ -2,27 +2,25 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
 import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 function SignInForm () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     // TODO - Axios
-    fetch('http://localhost:3000/api/admin/login',{
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "Content-type": "application/json"
-      }
+    const res = await axios.post('http://localhost:3000/api/admin/login',{
+      email,
+      password
     })
-      .then(res => res.json())
-      .then(data => {
-        localStorage.setItem('token', data.token)
-        console.log(data.token)
-      })
-      .catch(err => console.error('Fetch Login error: ' + err))
+    const data = res.data
+    localStorage.setItem('token', data.token)
+    console.log(data.token)
+    // navigate('/')
   }
 
   return (
