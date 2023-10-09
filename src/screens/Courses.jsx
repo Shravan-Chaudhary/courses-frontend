@@ -1,6 +1,7 @@
 import CourseCard from '../components/CourseCard.jsx'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Courses = () => {
   const [courses, setCourses] = useState([])
@@ -8,7 +9,7 @@ const Courses = () => {
   useEffect(() => {
     axios.get('http://localhost:3000/api/admin/courses', {
       headers: {
-        "authorization": `Bearer ${localStorage.getItem('token')}`
+        'authorization': `Bearer ${localStorage.getItem('token')}`
       }
     })
       .then(res => {
@@ -16,7 +17,6 @@ const Courses = () => {
       })
       .catch(err => console.error('Get courses: ' + err))
   }, [])
-
 
   return (
     <div style={{
@@ -27,7 +27,9 @@ const Courses = () => {
     }}>
       {
         courses.map(course => (
-          <CourseCard key={course._id} course={course} />
+          <Link to={`/course/${course._id}`} key={course._id} style={{ textDecoration: 'none' }}>
+            <CourseCard course={course}/>
+          </Link>
         ))
       }
     </div>
