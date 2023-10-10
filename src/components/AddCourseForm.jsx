@@ -4,42 +4,29 @@ import { Card, CardActions, CardContent, Typography } from '@mui/material'
 import { useState } from 'react'
 import axios from 'axios'
 
-
 function AddCourseForm () {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [imageLink, setImageLink] = useState('')
+  const [price, setPrice] = useState(null)
 
   const handleOnSubmit = async () => {
-   try {
-     const res = await axios.post('http://localhost:3000/api/admin/courses',{
-       title,
-       description,
-       imageLink
-     },{
-       headers: {
-         Authorization: `Bearer ${localStorage.getItem('token')}`
-       }
-     })
-     const data = res.data
-     alert('Course Added!')
-     console.log(data)
-   }
-   catch (err) {
-     console.error(`AddCourse Fetch: ${err}`)
-   }
-
-    // fetch('http://localhost:3000/api/admin/courses',{
-    //   method: 'POST',
-    //   body: JSON.stringify({title, description, imageLink}),
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     'authorization': `Bearer ${localStorage.getItem('token')}`
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(data => console.log(data))
-    //   .catch(err => console.error('AddCourseForm Fetch: ' + err))
+    try {
+      const res = await axios.post('http://localhost:3000/api/admin/courses', {
+        title,
+        description,
+        imageLink
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      const data = res.data
+      alert('Course Added!')
+      console.log(data)
+    } catch (err) {
+      console.error(`AddCourse Fetch: ${err}`)
+    }
   }
 
   return (
@@ -47,7 +34,7 @@ function AddCourseForm () {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      alignItems:'center',
+      alignItems: 'center',
       paddingTop: 150
     }}>
       <div>
@@ -61,11 +48,17 @@ function AddCourseForm () {
       }}>
         <Card>
           <CardContent sx={{ width: 400 }}>
-            <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={e => setTitle(e.target.value)}/>
+            <TextField fullWidth id="title" label="Title" variant="outlined" value={title}
+                       onChange={e => setTitle(e.target.value)}/>
             <br/><br/>
-            <TextField fullWidth id="description" label="Description" variant="outlined" value={description} onChange={e => setDescription(e.target.value)}/>
+            <TextField fullWidth id="description" label="Description" variant="outlined" value={description}
+                       onChange={e => setDescription(e.target.value)}/>
             <br/><br/>
-            <TextField fullWidth id="image-link" label="Image Link" variant="outlined" value={imageLink} onChange={e => setImageLink(e.target.value)}/>
+            <TextField fullWidth id="image-link" label="Image Link" variant="outlined" value={imageLink}
+                       onChange={e => setImageLink(e.target.value)}/>
+            <br/><br/>
+            <TextField fullWidth id="price" label="Price" variant="outlined" value={price}
+                       onChange={e => setPrice(Number(e.target.value))}/>
             <br/><br/>
           </CardContent>
           <CardActions sx={{

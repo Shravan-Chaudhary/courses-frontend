@@ -1,8 +1,7 @@
-
-const UpdateCourseForm = () => {
+const UpdateCourseForm = ({ course }) => {
   return (
     <div>
-      update course here
+      course update
     </div>
   )
 }

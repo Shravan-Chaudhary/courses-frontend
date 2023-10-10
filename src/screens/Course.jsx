@@ -43,7 +43,7 @@ const Course = () => {
       }}>
 
         <Grid item md={8}>
-          <UpdateCourseForm/>
+          <UpdateCourseForm course={course}/>
         </Grid>
 
         <Grid item md={4}>
